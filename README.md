@@ -7,7 +7,11 @@ Read and write common file formats to Amazon S3 and local files.
 Features
 --------
 
-- Reads and writes JSON
+- Reads and writes Pickle, JSON, and YAML
+- Works without an S3 connection (with local files)
+- Supports Python 2.7 and uses boto2
+- Supports OS X, Linux, and Windows
+- Tested and production-hardened
 
 
 Examples
