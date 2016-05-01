@@ -13,11 +13,12 @@ requirements_file = os.path.join(os.path.abspath(os.path.dirname(__file__)), 're
 with open(requirements_file, 'r') as f:
     install_requires = [x.strip() for x in f.readlines()]
 
+import importlib
 from setuptools import setup
 
 setup(
     name='baiji-serialization',
-    version=__import__('baiji.serialization').__version__,
+    version=importlib.import_module('baiji.serialization').__version__,
     author='Body Labs',
     author_email='alex@bodylabs.com, paul.melnikow@bodylabs.com',
     description='Read and write common file formats to Amazon S3 and local files',
