@@ -4,11 +4,11 @@ import simplejson as json
 EXTENSION = '.json'
 
 def dump(obj, f, *args, **kwargs):
-    from baiji.serialization.util import ensure_file_open_and_call
+    from baiji.serialization.util.openlib import ensure_file_open_and_call
     return ensure_file_open_and_call(f, _dump, 'w', obj, *args, **kwargs)
 
 def load(f, *args, **kwargs):
-    from baiji.serialization.util import ensure_file_open_and_call
+    from baiji.serialization.util.openlib import ensure_file_open_and_call
     return ensure_file_open_and_call(f, _load, 'r', *args, **kwargs)
 
 def loads(*args, **kwargs):

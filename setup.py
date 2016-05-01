@@ -28,6 +28,7 @@ setup(
     packages=[
         'baiji',
         'baiji/serialization',
+        'baiji/serialization/util',
     ],
     install_requires=install_requires,
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
