@@ -14,12 +14,17 @@ Examples
 --------
 
 ```py
-from example.hello import hello
-hello()
+from baiji.serialization import json
+with open(filename, 'w') as f:
+    json.dump(foo, f)
+with open(filename, 'r') as f:
+    foo = json.load(foo, f)
 ```
 
-```sh
-hello
+```py
+from baiji.serialization import json
+json.dump(filename)
+foo = json.load(filename)
 ```
 
 

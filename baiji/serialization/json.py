@@ -1,19 +1,3 @@
-'''
-Usage:
-
-    from baiji.serialization import json
-    with open(filename, 'w') as f:
-        json.dump(foo, f)
-    with open(filename, 'r') as f:
-        foo = json.load(foo, f)
-
-Or:
-
-    from baiji.serialization import json
-    json.dump(filename)
-    foo = json.load(filename)
-
-'''
 from __future__ import absolute_import
 import simplejson as json
 
