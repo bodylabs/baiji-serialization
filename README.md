@@ -7,9 +7,7 @@ Read and write common file formats to Amazon S3 and local files.
 Features
 --------
 
-- This
-- That
-- The other
+- Reads and writes JSON
 
 
 Examples
