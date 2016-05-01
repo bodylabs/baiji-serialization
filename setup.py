@@ -24,7 +24,7 @@ setup(
     description='Read and write common file formats to Amazon S3 and local files',
     long_description=long_description,
     url='https://github.com/bodylabs/baiji-serialization',
-    license='MIT',
+    license='Apache',
     packages=[
         'baiji',
         'baiji/serialization',
