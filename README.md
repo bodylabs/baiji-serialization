@@ -1,7 +1,7 @@
 baiji-serialization
 ===================
 
-Short description of the module.
+Read and write common file formats to Amazon S3 and local files.
 
 
 Features

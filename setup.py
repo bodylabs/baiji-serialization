@@ -16,20 +16,17 @@ with open(requirements_file, 'r') as f:
 from setuptools import setup
 
 setup(
-    name='example',
-    version=__import__('example').__version__,
+    name='baiji-serialization',
+    version=__import__('baiji.serialization').__version__,
     author='Body Labs',
-    author_email='___@bodylabs.com',
-    description='___',
+    author_email='alex@bodylabs.com, paul.melnikow@bodylabs.com',
+    description='Read and write common file formats to Amazon S3 and local files',
     long_description=long_description,
-    url='https://github.com/bodylabs/___',
+    url='https://github.com/bodylabs/baiji-serialization',
     license='MIT',
     packages=[
-        'example',
-        'example/util',
-    ],
-    scripts=[
-        'bin/hello',
+        'baiji',
+        'baiji/serialization',
     ],
     install_requires=install_requires,
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
