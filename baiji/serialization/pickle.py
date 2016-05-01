@@ -31,7 +31,7 @@ def _load(f, constructors=None):
       https://docs.python.org/2/library/pickle.html#subclassing-unpicklers
     '''
     import cPickle as pickle
-    from bodylabs.util.importlib import class_from_str
+    from baiji.serialization.util import class_from_str
 
     def unpickler_find_global(module_name, class_name):
         fully_qualified_name = '{}.{}'.format(module_name, class_name)
