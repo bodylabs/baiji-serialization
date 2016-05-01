@@ -1,4 +1,3 @@
-# FIXME pylint: disable=attribute-defined-outside-init
 EXTENSION = '.pkl'
 
 def dump(obj, f):
