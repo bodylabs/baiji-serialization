@@ -60,4 +60,4 @@ If you are having issues, please let us know.
 License
 -------
 
-The project is licensed under the two-clause BSD license.
+The project is licensed under the Apache license, version 2.0.
