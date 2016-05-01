@@ -45,8 +45,8 @@ rake lint
 Contribute
 ----------
 
-- Issue Tracker: github.com/bodylabs/example/issues
-- Source Code: github.com/bodylabs/example
+- Issue Tracker: github.com/bodylabs/baiji-serialization/issues
+- Source Code: github.com/bodylabs/baiji-serialization
 
 Pull requests welcome!
 
