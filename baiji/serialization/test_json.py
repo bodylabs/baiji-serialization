@@ -1,4 +1,5 @@
-import unittest, os
+import unittest
+import os
 from baiji.serialization import json
 
 class TestJson(unittest.TestCase):
