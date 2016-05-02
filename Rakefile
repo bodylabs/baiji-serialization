@@ -1,3 +1,18 @@
+$style_config_version = '1.0.0'
+
+desc "Install style config"
+task :install_style_config do
+    FileUtils.rm_rf "bodylabs-python-style" if Dir.exists? "bodylabs-python-style"
+    raise unless system "git clone https://github.com/bodylabs/bodylabs-python-style.git"
+    Dir.chdir 'bodylabs-python-style' do
+        raise unless system "git checkout tags/#{$style_config_version}"
+    end
+end
+
+task :require_style_config do
+  Rake::Task[:install_style_config].invoke unless File.executable? 'bodylabs-python-style/bin/pylint_test'
+end
+
 $mac_os = `uname -s`.strip == 'Darwin'
 
 desc "Install dependencies for distribution"
@@ -5,6 +20,7 @@ task :install_dist do
     if $mac_os
         raise unless system "brew update"
         raise unless system "brew install pandoc"
+        raise unless system "pip install pypandoc"
     else
         puts
         puts "You must install:"
@@ -23,14 +39,9 @@ task :test do
   raise unless system "nose2"
 end
 
-task :lint do
-  raise unless system "./pylint_test.py baiji --min_rating 10.0"
+task :lint => :require_style_config do
+  raise unless system "bodylabs-python-style/bin/pylint_test baiji --min_rating 10.0"
 end
-
-task :test_for_ci => [
-    :test,
-    :lint,
-]
 
 desc "Remove .pyc files"
 task :clean do
