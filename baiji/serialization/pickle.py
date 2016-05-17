@@ -1,3 +1,5 @@
+from cPickle import UnpicklingError
+
 EXTENSION = '.pkl'
 
 def dump(obj, f):
