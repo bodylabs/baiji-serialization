@@ -1,4 +1,4 @@
-from cPickle import UnpicklingError
+from cPickle import UnpicklingError # We import this to expose it to our importers pylint: disable=unused-import
 
 EXTENSION = '.pkl'
 
