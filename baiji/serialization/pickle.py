@@ -1,3 +1,5 @@
+from cPickle import UnpicklingError # We import this to expose it to our importers pylint: disable=unused-import
+
 EXTENSION = '.pkl'
 
 def dump(obj, f):
