@@ -21,32 +21,56 @@ def loads(s, *args, **kwargs):
 
 def dumps(obj, *args, **kwargs):
     import yaml
-    safe_dump = kwargs.pop('safe_dump', False) # Perhaps default should be True?
-    if safe_dump:
-        try:
-            return yaml.safe_dump(obj, *args, **kwargs)
-        except yaml.representer.RepresenterError as e:
+    import warnings
+    safe_mode = kwargs.pop('safe', None)
+    try:
+        return yaml.safe_dump(obj, *args, **kwargs)
+    except yaml.representer.RepresenterError as e:
+        if safe_mode:
             raise SerializationSafetyError(*e.args)
-    return yaml.dump(obj, *args, **kwargs)
+        if safe_mode is None:
+            warnings.warn(
+                ('Unsafe YAML serialization. This will generate an error in the '
+                 'future. Call with `safe=False` if you really want unsafe serialization.'),
+                warnings.DeprecationWarning, stacklevel=2
+            )
+        # if safe_mode is None (not given) or False (explicitly set), fall back to unsafe behavior
+        return yaml.dump(obj, *args, **kwargs)
+
 
 
 def _dump(f, obj, *args, **kwargs):
     import yaml
-    safe_dump = kwargs.pop('safe_dump', False) # Perhaps default should be True?
-    if safe_dump:
-        try:
-            return yaml.safe_dump(obj, f, *args, **kwargs)
-        except yaml.representer.RepresenterError as e:
+    import warnings
+    safe_mode = kwargs.pop('safe', None)
+    try:
+        return yaml.safe_dump(obj, f, *args, **kwargs)
+    except yaml.representer.RepresenterError as e:
+        if safe_mode:
             raise SerializationSafetyError(*e.args)
-    return yaml.dump(obj, f, *args, **kwargs)
+        if safe_mode is None:
+            warnings.warn(
+                ('Unsafe YAML serialization. This will generate an error in the '
+                 'future. Call with `safe=False` if you really want unsafe serialization.'),
+                warnings.DeprecationWarning, stacklevel=2
+            )
+        # if safe_mode is None (not given) or False (explicitly set), fall back to unsafe behavior
+        return yaml.dump(obj, f, *args, **kwargs)
 
 
 def _load(f, *args, **kwargs):
     import yaml
-    safe_load = kwargs.pop('safe_load', False) # Perhaps default should be True?
-    if safe_load:
-        try:
-            return yaml.safe_load(f, *args, **kwargs)
-        except yaml.constructor.ConstructorError as e:
+    safe_mode = kwargs.pop('safe', None)
+    try:
+        return yaml.safe_load(f, *args, **kwargs)
+    except yaml.constructor.ConstructorError as e:
+        if safe_mode:
             raise SerializationSafetyError(*e.args)
-    return yaml.load(f, *args, **kwargs)
+        if safe_mode is None:
+            warnings.warn(
+                ('Unsafe YAML serialization. This will generate an error in the '
+                 'future. Call with `safe=False` if you really want unsafe serialization.'),
+                warnings.DeprecationWarning, stacklevel=2
+            )
+        # if safe_mode is None (not given) or False (explicitly set), fall back to unsafe behavior
+        return yaml.load(f, *args, **kwargs)
