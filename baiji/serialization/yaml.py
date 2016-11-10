@@ -60,6 +60,7 @@ def _dump(f, obj, *args, **kwargs):
 
 def _load(f, *args, **kwargs):
     import yaml
+    import warnings
     safe_mode = kwargs.pop('safe', None)
     try:
         return yaml.safe_load(f, *args, **kwargs)
