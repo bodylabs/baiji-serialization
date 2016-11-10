@@ -32,7 +32,7 @@ def dumps(obj, *args, **kwargs):
             warnings.warn(
                 ('Unsafe YAML serialization. This will generate an error in the '
                  'future. Call with `safe=False` if you really want unsafe serialization.'),
-                warnings.DeprecationWarning, stacklevel=2
+                DeprecationWarning, stacklevel=2
             )
         # if safe_mode is None (not given) or False (explicitly set), fall back to unsafe behavior
         return yaml.dump(obj, *args, **kwargs)
@@ -52,7 +52,7 @@ def _dump(f, obj, *args, **kwargs):
             warnings.warn(
                 ('Unsafe YAML serialization. This will generate an error in the '
                  'future. Call with `safe=False` if you really want unsafe serialization.'),
-                warnings.DeprecationWarning, stacklevel=2
+                DeprecationWarning, stacklevel=2
             )
         # if safe_mode is None (not given) or False (explicitly set), fall back to unsafe behavior
         return yaml.dump(obj, f, *args, **kwargs)
@@ -70,7 +70,7 @@ def _load(f, *args, **kwargs):
             warnings.warn(
                 ('Unsafe YAML serialization. This will generate an error in the '
                  'future. Call with `safe=False` if you really want unsafe serialization.'),
-                warnings.DeprecationWarning, stacklevel=2
+                DeprecationWarning, stacklevel=2
             )
         # if safe_mode is None (not given) or False (explicitly set), fall back to unsafe behavior
         return yaml.load(f, *args, **kwargs)

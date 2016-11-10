@@ -18,9 +18,9 @@ class TestYAML(unittest.TestCase):
     def test_yaml_safe_dump_raises_on_unsafe(self):
         self.assertRaises(
             yaml.SerializationSafetyError,
-            yaml.dumps, UnsafeToDump, safe_dump=True)
+            yaml.dumps, UnsafeToDump, safe=True)
 
     def test_yaml_safe_load_raises_on_unsafe(self):
         self.assertRaises(
             yaml.SerializationSafetyError,
-            yaml.loads, unsafe_to_load, safe_load=True)
+            yaml.loads, unsafe_to_load, safe=True)
