@@ -99,3 +99,9 @@ class TestJson(unittest.TestCase):
         self.assertEqual(
             json.dumps({"foo": np.array([[859.0, 859.0], [217.0, 106.0], [302.0, 140.0]], dtype=np.float32)}),
             r'{"foo": {"dtype": "float32", "shape": [3, 2], "__ndarray__": [[859.0, 859.0], [217.0, 106.0], [302.0, 140.0]]}}')
+
+    def test_json_dump_ndarray_tricks_compatible_primitive_option(self):
+        import numpy as np
+        self.assertEqual(
+            json.dumps({"foo": np.array([[859.0, 859.0], [217.0, 106.0], [302.0, 140.0]], dtype=np.float32)}, primitive=True),
+            r'{"foo": [[859.0, 859.0], [217.0, 106.0], [302.0, 140.0]]}')
