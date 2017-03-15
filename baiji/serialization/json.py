@@ -62,7 +62,7 @@ def _json_encode(obj):
                 'dtype': obj.dtype.name,
                 'shape': obj.shape,
             }
-    except:
+    except ImportError:
         # Clearly there won't be any numpy arrays to encode...
         pass
     try:
@@ -78,7 +78,7 @@ def _json_encode(obj):
                 'row': coo.row,
                 'col': coo.col,
             }
-    except:
+    except ImportError:
         # Clearly there won't be any scipy.sparse arrays to encode...
         pass
     return None

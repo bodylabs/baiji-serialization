@@ -99,4 +99,3 @@ class TestJson(unittest.TestCase):
         self.assertEqual(
             json.dumps({"foo": np.array([[859.0, 859.0], [217.0, 106.0], [302.0, 140.0]], dtype=np.float32)}),
             r'{"foo": {"dtype": "float32", "shape": [3, 2], "__ndarray__": [[859.0, 859.0], [217.0, 106.0], [302.0, 140.0]]}}')
-
