@@ -42,13 +42,14 @@ def _json_decode(dct):
     Handle Custom json decoding and internal double underscore annotated Direct object deserialization
     '''
     if '__ndarray__' in dct:
-        if not 'dtype' in dct and 'shape' in dct:
-            return dct
         try:
             import numpy as np
-        except:
+        except ImportError:
             raise ImportError("JSON file contains numpy arrays; install numpy to load it")
-        dtype = np.dtype(dct['dtype'])
+        if 'dtype' in dct:
+            dtype = np.dtype(dct['dtype'])
+        else:
+            dtype = np.float64
         return np.array(dct['__ndarray__'], dtype=dtype)
     elif '__scipy.sparse.sparsematrix__' in dct:
         if not 'dtype' in dct and 'shape' in dct and 'data' in dct and 'format' in dct and 'row' in dct and 'col' in dct:
@@ -56,7 +57,7 @@ def _json_decode(dct):
         try:
             import numpy as np
             import scipy.sparse as sp
-        except:
+        except ImportError:
             raise ImportError("JSON file contains scipy.sparse arrays; install numpy and scipy to load it")
         coo = sp.coo_matrix((dct['data'], (dct['row'], dct['col'])), shape=dct['shape'], dtype=np.dtype(dct['dtype']))
         return coo.asformat(dct['format'])
