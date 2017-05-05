@@ -31,8 +31,9 @@ class MethodListCaller(object):
         if index == -1:
             index = len(self.method_list)
         self.method_list.insert(index, method)
-    
+
     def clear(self):
+        # be defensive if someone forgets to call super pylint: disable=attribute-defined-outside-init
         self.method_list = []
 
     def __call__(self, x):
