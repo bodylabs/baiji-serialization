@@ -28,7 +28,7 @@ class MethodListCaller(object):
     '''
     This is an internal class that lets the JSON(En,De)coder classes
     and their subclasses easily register a list of methods to try, which
-    will then be called in order until one of them succeeds. 
+    will then be called in order until one of them succeeds.
     '''
     def register(self, method, index=-1):
         if not hasattr(self, 'method_list'):
