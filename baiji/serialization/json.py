@@ -25,6 +25,11 @@ def loads(*args, **kwargs):
     return json.loads(*args, **_load_args(kwargs))
 
 class MethodListCaller(object):
+    '''
+    This is an internal class that lets the JSON(En,De)coder classes
+    and their subclasses easily register a list of methods to try, which
+    will then be called in order until one of them succeeds. 
+    '''
     def register(self, method, index=-1):
         if not hasattr(self, 'method_list'):
             self.clear()
@@ -37,6 +42,10 @@ class MethodListCaller(object):
         self.method_list = []
 
     def __call__(self, x):
+        '''
+        Call the methods in method_list until one of them returns something other than None
+        and return that as the result of the call.
+        '''
         from itertools import ifilter
         try:
             return next(ifilter(lambda x: x is not None, (f(x) for f in self.method_list)))
@@ -44,15 +53,41 @@ class MethodListCaller(object):
             return self.default(x)
 
     def default(self, x):
+        '''
+        If none of the methods returned something, then return this default
+        '''
         return x
 
 class JSONDecoder(MethodListCaller):
+    '''
+    Instances may be passed to simplejson as object_hook to decode json objects.
+    The decoders will be called in order. The first one to return something other
+    than None wins. The decoders will be given a dict to parse, something like:
+
+        {
+            "__ndarray__": [
+                    [859.0, 859.0],
+                    [217.0, 106.0],
+                    [302.0, 140.0]
+                ],
+            "dtype": "float32",
+            "shape": [3, 2]
+        }
+
+    Note that for object_hook, if we want to do nothing, we return the dict unchanged
+    and the json is decoded as a plain old dict; this behavior is the default of
+    MethodListCaller.
+    '''
     def __init__(self):
         self.register(self.decode_numpy)
         self.register(self.decode_scipy)
         self.register(self.decode)
 
     def decode(self, dct):
+        '''
+        In a subclass, either override this or add some decode functions and
+        override __init__ to register them
+        '''
         pass
 
     def decode_numpy(self, dct):
@@ -92,6 +127,26 @@ def _load_args(kwargs):
 
 
 class JSONEncoder(MethodListCaller):
+    '''
+    Instances may be passed to simplejson as default to encode json objects.
+    The encoders will be called in order. The first one to return something other
+    than None wins. The encoders will be given an object to encore and should return
+    a dict, something like:
+
+        {
+            "__ndarray__": [
+                    [859.0, 859.0],
+                    [217.0, 106.0],
+                    [302.0, 140.0]
+                ],
+            "dtype": "float32",
+            "shape": [3, 2]
+        }
+
+    Note that for default, if we want to do nothing, we return None and the object
+    is encoded as best as simplejson can (which is often by throwing a TypeError).
+    We override MethodListCaller.default to get this behavior.
+    '''
     def __init__(self, primitive=ENCODE_PRIMITIVES_BY_DEFAULT):
         self.primitive = primitive
         self.register(self.encode_numpy)
@@ -102,6 +157,10 @@ class JSONEncoder(MethodListCaller):
         return None
 
     def encode(self, obj):
+        '''
+        In a subclass, either override this or add some encode functions and
+        override __init__ to register them
+        '''
         pass
 
     def encode_numpy(self, obj):
