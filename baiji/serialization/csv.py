@@ -61,7 +61,7 @@ def _dump(f, obj):
     Per the docs for csv module, use this with binary mode on platforms
     where it matters:
 
-        from bodylabs.serialization import csv
+        from baiji.serialization import csv
         with open(file, 'wb') as f:
             csv.dump(obj, f)
 
@@ -100,7 +100,7 @@ class CSVSerializer(object):
     def render(self):
         return self.header + self.body
     def dump(self, f):
-        # Delegate to bodylabs.serialization.csv.dump()
+        # Delegate to baiji.serialization.csv.dump()
         dump(self.render(), f)
 
 
