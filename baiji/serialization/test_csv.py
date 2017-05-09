@@ -3,7 +3,7 @@ import unittest
 class TestCSV(unittest.TestCase):
 
     def test_collection_csv_serializer_renders_correct_rows(self):
-        from bodylabs.serialization.csv import CSVCollectionSerializer
+        from baiji.serialization.csv import CSVCollectionSerializer
 
         example_data = {
             'one': {'foo': 'baz1', 'bar': 'inga1'},
@@ -28,7 +28,7 @@ class TestCSV(unittest.TestCase):
 
     def test_collection_csv_serializer_works_with_row_ordering_np_array(self):
         import numpy as np
-        from bodylabs.serialization.csv import CSVCollectionSerializer
+        from baiji.serialization.csv import CSVCollectionSerializer
 
         example_data = {
             'one': {'foo': 'baz1', 'bar': 'inga1'},
