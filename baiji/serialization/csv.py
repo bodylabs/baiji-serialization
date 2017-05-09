@@ -117,7 +117,7 @@ class CSVCollectionSerializer(CSVSerializer):
 
         '''
         super(CSVCollectionSerializer, self).__init__(collection)
-        self.keys = self.__class__.compute_keys(collection)
+        self.keys = self.compute_keys(collection)
         if isinstance(collection, dict):
             self.header = [[''] + self.keys]
         else:
