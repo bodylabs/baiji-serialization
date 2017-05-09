@@ -27,6 +27,7 @@ with open(filename, 'r') as f:
 
 ```py
 from baiji.serialization import json
+json.dump(foo, filename)
 foo = json.load(filename)
 ```
 
@@ -40,6 +41,7 @@ with open(filename, 'r') as f:
 
 ```py
 from baiji.serialization import csv
+csv.dump(foo, filename)
 foo = csv.load(filename)
 ```
 
