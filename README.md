@@ -7,7 +7,7 @@ Read and write common file formats to Amazon S3 and local files.
 Features
 --------
 
-- Reads and writes Pickle, JSON, and YAML
+- Reads and writes Pickle, CSV, JSON, and YAML
 - Works without an S3 connection (with local files)
 - Supports Python 2.7 and uses boto2
 - Supports OS X, Linux, and Windows
@@ -22,15 +22,26 @@ from baiji.serialization import json
 with open(filename, 'w') as f:
     json.dump(foo, f)
 with open(filename, 'r') as f:
-    foo = json.load(foo, f)
+    foo = json.load(f)
 ```
 
 ```py
 from baiji.serialization import json
-json.dump(filename)
 foo = json.load(filename)
 ```
 
+```py
+from baiji.serialization import csv
+with open(filename, 'w') as f:
+    csv.dump(foo, f)
+with open(filename, 'r') as f:
+    foo = csv.load(f)
+```
+
+```py
+from baiji.serialization import csv
+foo = csv.load(filename)
+```
 
 Development
 -----------
